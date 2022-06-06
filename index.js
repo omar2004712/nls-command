@@ -2,14 +2,17 @@
 const fs = require('fs');
 const { lstat } = fs.promises;
 const { cwd } = process;
+const path = require('path')
 
-fs.readdir(cwd(), async (err, files) => {
+const target = process.argv[2] || cwd();
+
+fs.readdir(target, async (err, files) => {
     if(err){
         console.log(err)
         return;
     }
     const stats = files.map((file)=>{
-        return lstat(file);
+        return lstat(path.join(target, file));
     })
     Promise.all(stats).then((stats) => {
         stats.forEach((stat, index)=>{
