@@ -14,7 +14,7 @@ fs.readdir(cwd(), async (err, files) => {
     Promise.all(stats).then((stats) => {
         stats.forEach((stat, index)=>{
             if(stat.isDirectory()){
-                console.log(files[index]);
+                console.log(files[index] + '/');
             }
             else {
                 console.log(files[index])
