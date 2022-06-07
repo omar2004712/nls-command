@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+const colors = require('colors');
+
+colors.enable()
+
 const fs = require('fs');
 const { lstat } = fs.promises;
 const { cwd } = process;
@@ -17,10 +21,10 @@ fs.readdir(target, async (err, files) => {
     Promise.all(stats).then((stats) => {
         stats.forEach((stat, index)=>{
             if(stat.isDirectory()){
-                console.log(files[index] + '/');
+                console.log((files[index] + '/').bold.blue + '\t');
             }
             else {
-                console.log(files[index])
+                console.log(files[index] + '\t')
             }
         })
     }).catch(err => {
